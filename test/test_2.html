@@ -28,12 +28,46 @@
 		a{
 			text-decoration: none;
 		}
+		.test_2_container{
+			position: relative;
+		}
+		.test_2_container .test2-text-container{
+			width: 700px;
+			height: 80px;
+			position: relative;
+		}
+		.test_2_container .test2-text-container .test2_textarea{
+			width: calc(100% - 11px);
+			height: calc(100% - 11px);
+			resize: none;
+			border: 1px solid #ababab;
+			padding: 5px;
+		}
+		.test_2_container .byte{
+			color: #a7a7a7;
+			position: absolute;
+			bottom: 0.5em;
+			right: 0.5em;
+		}
+		.test_2_container .save{
+			position: absolute;
+			right: 0;
+			width: 80px;
+			height: 100%;
+			background: #fff;
+		
+		}
 
 		</style>
 	</head>
 	<body>
 		<div class="test_2_container">
-			<textarea class=""></textarea>
+			<div class="test2-text-container">
+				<textarea class="test2_textarea" placeholder="내용이 있을수도 있습니다."></textarea>
+				<span class="byte">132131</span>
+				<button id="save">Save</button>
+			</div>
+			
 		</div>
 	</body>
 </html>
