@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<title>아이디어스 과제</title>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script>
+			$( document ).ready( function() {
+
+			} );
+		</script>
+		<style>
+		@media (max-width:600px){
+            .test_1_container{
+            }
+        }
+        @media (max-width:500px){
+            .test_1_container{
+            }
+        }
+        @media (min-width:600px){
+            .test_1_container{
+            }
+        }
+		body{
+			font-size: 14px;
+		}
+		a{
+			text-decoration: none;
+		}
+		.test_1_container{
+			width: 80%;
+			min-width: 200px;
+			max-width: 900px;
+			margin: 0 auto;
+		}
+		.test_1_container *{
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+		.test_1_vertical{
+			width: 30%;
+			display: flex;
+			flex-direction: column;
+			border: 1px solid #dedede;
+			position: relative;
+			float: left;
+			margin: 0.5em;
+		}
+		.test_1_horizon{
+			width: 65%;
+			display: flex;
+			border: 1px solid #dedede;
+			position: relative;
+			float: left;
+			margin: 0.5em;
+			min-width: 350px;
+		}
+		.test_1_img{
+			background-image: url('https://image.idus.com/image/files/48114f9eab2246ca80184a792f1128f2_512.jpg');
+			position: relative;
+    		display: block;
+    		width: 100%;
+    		height: auto;
+    		background-size: cover;
+    		background-repeat: no-repeat;
+    		background-position: 50%;
+    		transition: transform .5s ease-in-out;
+		}
+		.test_1_img::after{
+			content:"";
+			display: block;
+			padding-bottom: 100%;
+		}
+		.test_1_vertical .test_middle{
+			background-color: #efefef;
+			position: relative;
+			height: 100px;
+			padding: 5px;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+		}
+		.test_1_horizon .test_middle_hori{
+			background-color: #efefef;
+			flex-direction: column;
+			position: relative;
+			width: 570px;
+			padding: 10px 20px; 
+			box-sizing: border-box;
+			display: flex;
+		}
+		.test_middle .sub_label{
+			color: #9c9c9c;
+			font-size: 0.9em;
+		}
+		.test_middle .sub_title{
+			font-size: 1.1em;
+			color: #313131;
+		}
+		.test_middle .sub_text{
+			line-height: 1em;
+			margin: 0;
+			bottom: 0.7em;
+			position: absolute;
+		}
+		.sub_text span:first-child{
+			color: red;
+			font-size: 0.9em;
+
+		}
+		.sub_text span:last-child{
+			color: #9c9c9c;
+			font-size: 0.7em;
+			margin-left: 0.5em;
+			text-decoration: line-through;
+		}
+		.test_bottom{
+			background-color: #efefef;
+			position: relative;
+			height: 55px;
+			padding: 5px;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			border-top:1px solid #dedede;
+		}
+		.star_container{
+			display: table-cell;
+    		font-size: 1em;
+			vertical-align: middle;
+			box-sizing: border-box;
+		}
+		.star_container_hori{
+			position: absolute;
+    		font-size: 1em;
+			vertical-align: middle;
+			box-sizing: border-box;
+			bottom: 1.4em;
+		}
+		.star-fill{
+    		font-weight: normal;
+    		font-variant: normal;
+    		-webkit-font-smoothing: antialiased;    
+    		vertical-align: middle;
+			font-size: 1.2em;
+			color: #ccc;
+    		display: inline-block;
+		}
+		.star-fill::before{
+			content:'●';
+		  	display:inline-block;
+		}
+		.star-fill-active{
+			color: #ffc801;
+
+		}
+		.bottom_sub_text{
+			line-height: 1em;
+			margin: 0;
+			bottom: 0.7em;
+			position: absolute;
+			color: #8a8a8a;
+			font-size: 0.9em;
+		}
+		.not-sub-bottom{
+			margin-top: 0.5em;
+		}
+		.sub_label_hori{
+			font-size: 1em;
+			margin: 0.5em 0;
+			font-weight: bold;
+			color: #313131;
+		}
+		.sub_title_hori{
+			line-height: 1.5em;
+			white-space:normal;
+			color: #545454;
+			margin: 1vw 0;
+			height: 3em;
+		}
+		.hori_star_container{
+			position: absolute;
+			bottom: 1.3em;
+			display: flex;
+			align-items: center;
+		}
+		.star_sub_text{
+			font-size: 0.9em;
+			color: #9a9a9a;
+			margin-left: 0.3em;
+		}
+		.star_sub_text::before{
+			content: " | ";
+		}
+		</style>
+	</head>
+	<body>
+		<div class="test_1_container">
+
+			<div class="test_1_vertical">
+				<a href="#" class="test_1_img"></a>
+				<div class="test_middle">
+					<a href="#" class="sub_label">Card Label</a>
+					<a href="#" class="sub_title">Card Title</a>
+					<p class="sub_text"><span>Hilight</span><span>Cross Out</span></p>
+				</div>
+				<div class="test_bottom">
+					<div class="star_container" data="4">
+						<span class="star-fill star-fill-active" data="active"></span>
+						<span class="star-fill star-fill-active" data="active"></span>
+						<span class="star-fill star-fill-active" data="active"></span>
+						<span class="star-fill star-fill-active" data="active"></span>
+						<span class="star-fill"></span>
+					</div>
+					<p class="bottom_sub_text">Lorem ipsum dolor sit ament</p>
+				</div>
+			</div>
+
+			<div class="test_1_vertical">
+				<a href="#" class="test_1_img"></a>
+				<div class="test_middle">
+					<a href="#" class="sub_label">Card Label</a>
+					<a href="#" class="sub_title">Card Title</a>
+					<p class="sub_text"><span>Hilight</span><span>Cross Out</span></p>
+				</div>
+				<div class="test_bottom">
+					<div class="star_container not-sub-bottom" data="5">
+						<span class="star-fill star-fill-active" data="active"></span>
+						<span class="star-fill star-fill-active" data="active"></span>
+						<span class="star-fill star-fill-active" data="active"></span>
+						<span class="star-fill star-fill-active" data="active"></span>
+						<span class="star-fill star-fill-active" data="active"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="test_1_vertical">
+				<a href="#" class="test_1_img"></a>
+				<div class="test_middle">
+					<a href="#" class="sub_label">Card Label</a>
+					<a href="#" class="sub_title">Card Title</a>
+					<p class="sub_text"><span>Hilight</span><span>Cross Out</span></p>
+				</div>
+			</div>
+
+			<div class="test_1_horizon">
+				<a href="#" class="test_1_img"></a>
+				<div class="test_middle_hori">
+					<a href="#" class="sub_label_hori">Lorem ipsum dolor sit ament</a>
+					<a href="#" class="sub_title_hori">Lorem ipsum dolor sit ament consectetur adipisicing elit</a>
+					<div class="hori_star_container">
+						<div class="star_container" data="3">
+							<span class="star-fill star-fill-active" data="active"></span>
+							<span class="star-fill star-fill-active" data="active"></span>
+							<span class="star-fill star-fill-active" data="active"></span>
+							<span class="star-fill"></span>
+							<span class="star-fill"></span>
+						</div>
+						<span class="star_sub_text">John Doe</span>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</body>
+</html>
