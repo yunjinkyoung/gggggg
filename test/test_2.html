@@ -6,22 +6,47 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script>
 			$( document ).ready( function() {
+				let textVal = $('.test2_textarea').val()
 
-			} );
+			$('.test2_textarea').keyup(function(e){
+				let areaVal = $(this).val()
+				let byteLength = areaVal.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g,"$&$1$2").length;
+				const maxByte = 500
+				console.log(byteLength)
+
+				if(byteLength > maxByte){
+					alert('글자수가 초과되었습니다.')
+					var cutVal = cutByLen(areaVal, maxByte)
+					$(this).val(cutVal)
+					return
+				}
+
+				$('.test2_textarea .byte').text(maxByte - Number(byteLength))
+
+				if(textVal == areaVal){
+					$('#save').attr('disabled','disabled')
+				}else{
+					$('#save').removeAttr('disabled')
+					$(this).css('width', '603px')
+					$('.test2_textarea .byte').css('right', '6.8em')
+					$('#save').show()
+				}
+			})
+
+			function cutByLen(str, maxByte) {
+				for(b=i=0;c=str.charCodeAt(i);) {
+				b+=c>>7?2:1;
+				if (b > maxByte)
+				break;
+				i++;
+				}
+				return str.substring(0,i);
+			}
+
+
+			});
 		</script>
 		<style>
-		@media (max-width:600px){
-            .test_1_container{
-            }
-        }
-        @media (max-width:500px){
-            .test_1_container{
-            }
-        }
-        @media (min-width:600px){
-            .test_1_container{
-            }
-        }
 		body{
 			font-size: 14px;
 		}
@@ -30,18 +55,29 @@
 		}
 		.test_2_container{
 			position: relative;
+			width: 700px;
+			display: flex;
+			margin: 15px 0;
 		}
+	
 		.test_2_container .test2-text-container{
 			width: 700px;
 			height: 80px;
 			position: relative;
 		}
-		.test_2_container .test2-text-container .test2_textarea{
+		.test_2_container .test2-text-container .test2_textarea, .test_2_container .test2-text-container .test2_textarea_disable, .test_2_container .test2-text-container .test2_textarea_readonly{
+			overflow: hidden;
 			width: calc(100% - 11px);
 			height: calc(100% - 11px);
 			resize: none;
-			border: 1px solid #ababab;
+			border: 1px solid #cecece;
 			padding: 5px;
+			border-radius: 5px;
+		}
+		textarea:focus{
+			outline: none !important;
+			box-shadow: 0 0 2px #2ca7ad;
+			border-color: #2ca7ad;
 		}
 		.test_2_container .byte{
 			color: #a7a7a7;
@@ -49,13 +85,33 @@
 			bottom: 0.5em;
 			right: 0.5em;
 		}
-		.test_2_container .save{
+		.test_2_container #save{
+			display: none;
 			position: absolute;
 			right: 0;
 			width: 80px;
 			height: 100%;
 			background: #fff;
-		
+			color: #2ca7ad;
+			border: 1px solid #cecece;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		button:disabled{
+			background-color: #eaeaea !important;
+			color: #a9a9a9 !important;
+		}
+		.test2_textarea_disable:disabled{
+			background-color: #eaeaea;
+		}
+		.test2_textarea_readonly:read-only{
+			background-color: #f5f5f5;
+		}
+		.test2_textarea_disable:disabled::placeholder{
+			color:#ec7a7a;
+		}
+		.test2_textarea_readonly:read-only::placeholder{
+			color:#5a5a5a;
 		}
 
 		</style>
@@ -64,10 +120,27 @@
 		<div class="test_2_container">
 			<div class="test2-text-container">
 				<textarea class="test2_textarea" placeholder="내용이 있을수도 있습니다."></textarea>
-				<span class="byte">132131</span>
-				<button id="save">Save</button>
+				<span class="byte">500</span>
 			</div>
-			
+			<button id="save">Save</button>
 		</div>
+
+		<div class="test_2_container">
+			<div class="test2-text-container">
+				<textarea class="test2_textarea_disable" placeholder="주문 요청사항을 입력해주세요." disabled></textarea>
+				<span class="byte">500</span>
+			</div>
+			<button id="save">Save</button>
+		</div>
+
+
+		<div class="test_2_container">
+			<div class="test2-text-container">
+				<textarea class="test2_textarea_readonly" placeholder="readonly test" readonly></textarea>
+				<span class="byte">500</span>
+			</div>
+			<button id="save">Save</button>
+		</div>
+
 	</body>
 </html>
