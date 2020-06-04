@@ -1,4 +1,4 @@
-# 아이디어스_
+# idus_test
 
 [과제1]
 test/test_1.html
