@@ -2,46 +2,64 @@
 <html lang="ko">
 	<head>
 		<meta charset="utf-8">
-		<title>아이디어스 과제</title>
+		<title>아이디어스 과제2</title>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script>
 			$( document ).ready( function() {
 				let textVal = $('.test2_textarea').val()
 
-			$('.test2_textarea').keyup(function(e){
-				let areaVal = $(this).val()
-				let byteLength = areaVal.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g,"$&$1$2").length;
-				const maxByte = 500
-				console.log(byteLength)
+				$('.test2_textarea').keyup(function(e){
+					let areaVal = $(this).val()
+					let byteLength = areaVal.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g,"$&$1$2").length;
+					const maxByte = 500
+				
+					if(byteLength > maxByte){
+						alert('글자수가 초과되었습니다.')
+						var cutVal = cutString(areaVal, maxByte)
+						$(this).val(cutVal)
+						return
+					}
 
-				if(byteLength > maxByte){
-					alert('글자수가 초과되었습니다.')
-					var cutVal = cutByLen(areaVal, maxByte)
-					$(this).val(cutVal)
-					return
+					$('.test2_textarea + .byte').text(maxByte - Number(byteLength))
+
+					if(textVal == areaVal){
+						$('#save').attr('disabled','disabled')
+					}else{
+						$('#save').removeAttr('disabled')
+						$(this).css('width', '603px')
+						$('.test2_textarea + .byte').css('right', '6.8em')
+						$('#save').show()
+					}
+				})
+
+				function cutString(str, maxByte){
+				 var strLength = 0;
+				 var strTitle = "";
+				 var strPiece = "";
+
+				 for (i = 0; i < str.length; i++){
+					 var code = str.charCodeAt(i);
+					 var ch = str.substr(i,1).toUpperCase();
+					 //체크 하는 문자를 저장
+					 strPiece = str.substr(i,1)
+					 code = parseInt(code);
+				
+					 if ((ch < "0" || ch > "9") && (ch < "A" || ch > "Z") && ((code > 255) || (code < 0))){
+						 strLength = strLength + 3; //UTF-8 3byte 로 계산
+					 }else{
+						 strLength = strLength + 1;
+					 }
+				 
+					 if(strLength>limit){ //제한 길이 확인
+						 break;
+					 }else{
+						 strTitle = strTitle+strPiece; //제한길이 보다 작으면 자른 문자를 붙여준다.
+					 }
+				 }
+
+				 return strTitle;
+			 
 				}
-
-				$('.test2_textarea .byte').text(maxByte - Number(byteLength))
-
-				if(textVal == areaVal){
-					$('#save').attr('disabled','disabled')
-				}else{
-					$('#save').removeAttr('disabled')
-					$(this).css('width', '603px')
-					$('.test2_textarea .byte').css('right', '6.8em')
-					$('#save').show()
-				}
-			})
-
-			function cutByLen(str, maxByte) {
-				for(b=i=0;c=str.charCodeAt(i);) {
-				b+=c>>7?2:1;
-				if (b > maxByte)
-				break;
-				i++;
-				}
-				return str.substring(0,i);
-			}
 
 
 			});
@@ -119,27 +137,25 @@
 	<body>
 		<div class="test_2_container">
 			<div class="test2-text-container">
-				<textarea class="test2_textarea" placeholder="내용이 있을수도 있습니다."></textarea>
+				<textarea class="test2_textarea" placeholder="내용이 있을수도 있습니다." title="내용 입력"></textarea>
 				<span class="byte">500</span>
 			</div>
-			<button id="save">Save</button>
+			<button id="save" title="저장하기">Save</button>
 		</div>
 
 		<div class="test_2_container">
 			<div class="test2-text-container">
-				<textarea class="test2_textarea_disable" placeholder="주문 요청사항을 입력해주세요." disabled></textarea>
+				<textarea class="test2_textarea_disable" placeholder="주문 요청사항을 입력해주세요." title="내용 입력불가" disabled></textarea>
 				<span class="byte">500</span>
 			</div>
-			<button id="save">Save</button>
 		</div>
 
 
 		<div class="test_2_container">
 			<div class="test2-text-container">
-				<textarea class="test2_textarea_readonly" placeholder="readonly test" readonly></textarea>
+				<textarea class="test2_textarea_readonly" placeholder="readonly test" title="내용 읽기" readonly></textarea>
 				<span class="byte">500</span>
 			</div>
-			<button id="save">Save</button>
 		</div>
 
 	</body>
